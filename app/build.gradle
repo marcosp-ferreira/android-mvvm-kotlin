@@ -15,8 +15,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+        }
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -25,7 +28,9 @@ android {
 dependencies {
     // Libraries versions
     def core = "1.0.2"
-    def koin_version = "2.0.1"
+    def koin = "2.0.1"
+    def retrofit = "2.4.0"
+    def arch_core = "2.1.0"
 
     // Base Libraries
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -33,9 +38,22 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$core"
     implementation "androidx.core:core-ktx:$core"
 
-    implementation "org.koin:koin-android:$koin_version"
+    // Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-rc03"
+//    implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
+//    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.1.0"
+
+    // Support Libraries
+    implementation "androidx.arch.core:core-common:$arch_core"
+    implementation "androidx.arch.core:core-runtime:$arch_core"
+    implementation "org.koin:koin-android:$koin"
+    implementation "org.koin:koin-androidx-viewmodel:$koin"
     implementation "androidx.constraintlayout:constraintlayout:1.1.3"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation  "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1"
+    implementation  "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1"
 
     // Automated Tests
     testImplementation 'junit:junit:4.12'
