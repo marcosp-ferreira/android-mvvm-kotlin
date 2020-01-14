@@ -1,5 +1,6 @@
 package com.mystudies.imggallery.repository
 
+import com.mystudies.imggallery.BuildConfig
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -17,7 +18,7 @@ object WebServiceManager {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.imgur.com/")
+                .baseUrl(BuildConfig.GALLERY_BASE_API)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
